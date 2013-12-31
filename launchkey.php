@@ -21,7 +21,7 @@ class LaunchKey {
 		add_action( 'login_form', array( &$this, 'launchkey_form' ) );
 		add_action( 'wp_login', array( &$this, 'launchkey_pair' ), 1, 2 );
 		add_action( 'wp_logout', array( &$this, 'launchkey_logout' ), 1, 2 );
-		add_shortcode( 'launchkey_login', array( &$this, 'launchkey_shortcode') );
+		add_shortcode( 'launchkey_login', array( $this, 'launchkey_shortcode') );
 		if ( is_admin() ) {
 			add_action( 'admin_menu', array( $this, 'launchkey_plugin_page' ) );
 			add_action( 'admin_init', array( $this, 'launchkey_page_init' ) );
