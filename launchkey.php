@@ -21,6 +21,7 @@ class LaunchKey {
 		add_action( 'login_form', array( &$this, 'launchkey_form' ) );
 		add_action( 'wp_login', array( &$this, 'launchkey_pair' ), 1, 2 );
 		add_action( 'wp_logout', array( &$this, 'launchkey_logout' ), 1, 2 );
+		add_shortcode( 'launchkey_login', 'launchkey_shortcode' );
 		if ( is_admin() ) {
 			add_action( 'admin_menu', array( $this, 'launchkey_plugin_page' ) );
 			add_action( 'admin_init', array( $this, 'launchkey_page_init' ) );
@@ -456,7 +457,18 @@ class LaunchKey {
 			delete_user_meta( $user->ID, 'launchkey_user' );
 		}
 	} //end launchkey_unpair
-
+	
+	/**
+	 * launchkey_shortcode - outputs a launchkey login button
+	 *
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function launchkey_shortcode() {
+		launchkey_form();
+	} //end launchkey_shortcode
+	
 } //end class LaunchKey
 
 $LaunchKey = new LaunchKey();
