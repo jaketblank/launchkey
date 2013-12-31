@@ -318,7 +318,6 @@ class LaunchKey {
 					$data                  = array();
 					$data['client_id']     = get_option( 'launchkey_app_key' );
 					$data['client_secret'] = get_option( 'launchkey_secret_key' );
-
 					$data['redirect_uri']  = admin_url();
 					$data['refresh_token'] = $_COOKIE['launchkey_refresh_token'];
 					$data['grant_type']    = "refresh_token";
