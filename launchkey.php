@@ -21,7 +21,7 @@ class LaunchKey {
 		add_action( 'login_form', array( &$this, 'launchkey_form' ) );
 		add_action( 'wp_login', array( &$this, 'launchkey_pair' ), 1, 2 );
 		add_action( 'wp_logout', array( &$this, 'launchkey_logout' ), 1, 2 );
-		add_shortcode( 'launchkey_login', 'launchkey_shortcode' );
+		add_shortcode( 'launchkey_login', array( &$this, 'launchkey_shortcode') );
 		if ( is_admin() ) {
 			add_action( 'admin_menu', array( $this, 'launchkey_plugin_page' ) );
 			add_action( 'admin_init', array( $this, 'launchkey_page_init' ) );
@@ -318,6 +318,7 @@ class LaunchKey {
 					$data                  = array();
 					$data['client_id']     = get_option( 'launchkey_app_key' );
 					$data['client_secret'] = get_option( 'launchkey_secret_key' );
+
 					$data['redirect_uri']  = admin_url();
 					$data['refresh_token'] = $_COOKIE['launchkey_refresh_token'];
 					$data['grant_type']    = "refresh_token";
@@ -466,7 +467,7 @@ class LaunchKey {
 	 * @return void
 	 */
 	public function launchkey_shortcode() {
-		launchkey_form();
+		$this->launchkey_form();
 	} //end launchkey_shortcode
 	
 } //end class LaunchKey
